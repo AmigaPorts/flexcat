@@ -23,7 +23,7 @@
 #ifndef OPENLIBS_H
 #define OPENLIBS_H 1
 
-#if defined(AMIGA)
+#ifdef __AMIGA__
 BOOL OpenLibs(void);
 void CloseLibs(void);
 #else

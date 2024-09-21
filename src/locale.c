@@ -9,8 +9,10 @@
 ****************************************************************/
 
 /* Include files */
+#ifdef __AMIGA__
 #include <libraries/gadtools.h>
 #include <proto/locale.h>
+#endif
 #include <string.h>
 
 #include "FlexCat_cat.h"

@@ -202,7 +202,7 @@ ifeq ($(OS), os4)
   REDEFINE = -DCoerceMethod=ICoerceMethod -DDoMethod=IDoMethod \
              -DDoSuperMethod=IDoSuperMethod -DDoSuperMethodA=IDoSuperMethodA
   CFLAGS   += -mcrt=$(CRT) -D__USE_INLINE__ -D__NEW_TIMEVAL_DEFINITION_USED__ \
-              $(REDEFINE) -Wa,-mregnames -DAMIGA
+              $(REDEFINE) -Wa,-mregnames -DAMIGA -D__AMIGA__
   LDFLAGS  += -mcrt=$(CRT)
   LDLIBS   += -lauto -lunix
   CDUP     = ../
@@ -227,8 +227,8 @@ ifeq ($(OS), os3)
 
   # Compiler/Linker flags
   CPU     = -m68020-60 -msoft-float
-  CFLAGS  += -mcrt=clib2 -I./include/netinclude -DNO_INLINE_STDARG -D__amigaos3__ -DAMIGA
-  LDFLAGS += -mcrt=clib2
+  CFLAGS  += -mcrt=nix20 -I./include/netinclude -DNO_INLINE_STDARG -D__amigaos3__ -DAMIGA -D__AMIGA__
+  LDFLAGS += -mcrt=nix20
   LDLIBS  += -lamiga
   GCCVER  = 2
 
@@ -253,7 +253,7 @@ ifeq ($(OS), mos)
 
   # Compiler/Linker flags
   CPU     = -mcpu=powerpc
-  CFLAGS  += -noixemul -I./include/netinclude -DAMIGA
+  CFLAGS  += -noixemul -I./include/netinclude -DAMIGA -D__AMIGA__
   LDFLAGS += -noixemul
   LDLIBS  += -lauto -lcodesets
   GCCVER  = 2
@@ -278,7 +278,7 @@ ifeq ($(OS), aros-i386)
 
   # Compiler/Linker flags
   OPTFLAGS = -O3 -fomit-frame-pointer
-  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA
+  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA -D__AMIGA__
   LDLIBS += -lamiga -larossupport -larosc
 
   SYSDEPOBJS = locale.o \
@@ -302,7 +302,7 @@ ifeq ($(OS), aros-ppc)
 
   # Compiler/Linker flags
   OPTFLAGS = -O3 -fomit-frame-pointer
-  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA
+  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA -D__AMIGA__
   LDLIBS += -lamiga -larossupport -larosc
 
   SYSDEPOBJS = locale.o \
@@ -326,7 +326,7 @@ ifeq ($(OS), aros-x86_64)
 
   # Compiler/Linker flags
   OPTFLAGS = -O3 -fomit-frame-pointer
-  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA
+  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA -D__AMIGA__
   LDLIBS += -lamiga -larossupport -larosc
 
   SYSDEPOBJS = locale.o \
@@ -350,7 +350,7 @@ ifeq ($(OS), aros-arm)
 
   # Compiler/Linker flags
   OPTFLAGS = -O3 -fomit-frame-pointer
-  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA
+  CFLAGS += -Wno-pointer-sign -DNO_INLINE_STDARG -D__BSD_VISIBLE=1 -DAMIGA -D__AMIGA__
   LDLIBS += -lamiga -larossupport -larosc
 
   SYSDEPOBJS = locale.o \
@@ -500,7 +500,7 @@ else
 endif
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET): $(CATFILES) $(addprefix $(OBJDIR)/,$(OBJS))
+$(TARGET): $(OBJDIR) $(DEPDIR) $(BINDIR) $(CATFILES) $(addprefix $(OBJDIR)/,$(OBJS))
 	@echo "  LD $@.debug"
 	@$(CC) $(LDFLAGS) -o $@.debug $(addprefix $(OBJDIR)/,$(OBJS)) $(LDLIBS) -Wl,--cref,-M,-Map=$@.map
 	@echo "  LD $@"
