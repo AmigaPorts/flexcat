@@ -24,7 +24,7 @@
 #define  FLEXCAT_H
 
 /* Amiga enviroment? */
-#ifdef AMIGA
+#ifdef __AMIGA__
  #include "FlexCat_cat.h"
 #else
  #include "FlexCat_cat_other.h"

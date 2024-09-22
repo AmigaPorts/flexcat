@@ -15,7 +15,7 @@
 #endif
 #include <string.h>
 
-#include "FlexCat_cat.h"
+#include "flexcat.h"
 
 /* Variables */
 struct FC_String FlexCat_Strings[] =
