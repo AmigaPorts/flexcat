@@ -20,7 +20,7 @@
  *
  */
 
-#if defined(AMIGA)
+#ifdef __AMIGA__
 #include "flexcat.h"
 #include "openlibs.h"
 #include "utils.h"

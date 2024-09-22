@@ -11,9 +11,12 @@
 #ifndef FlexCat_CAT_H
 #define FlexCat_CAT_H
 
-
+#ifdef __AMIGA__
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
+#endif
+#else
+#define STRPTR void
 #endif
 
 void LocalizeStringArray(STRPTR *Array);
