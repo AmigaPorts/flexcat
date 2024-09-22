@@ -449,7 +449,7 @@ release:
 	make OS=os4 DEBUG=
 	@echo "  CC $<"
 	make OS=os3 clean
-	make OS=os3 DEBUG=
+	make OS=os3 DEBUG=$(TARGET)
 	@echo "  CC $<"
 	make OS=mos clean
 	make OS=mos DEBUG=
@@ -508,20 +508,28 @@ $(TARGET): $(OBJDIR) $(DEPDIR) $(BINDIR) $(CATFILES) $(addprefix $(OBJDIR)/,$(OB
 	@$(CHMOD) $@
 
 locale.c: locale/FlexCat.pot sd/NoAutoC_c.sd
-	@echo "  FC $@"
-	@$(FLEXCAT) locale/FlexCat.pot locale.c=sd/NoAutoC_c.sd
+	ifeq (,$(wildcard locale.c))
+		@echo "  FC $@"
+		@$(FLEXCAT) locale/FlexCat.pot locale.c=sd/NoAutoC_c.sd
+	endif
 
 FlexCat_cat.h: locale/FlexCat.pot sd/NoAutoC_h.sd
-	@echo "  FC $@"
-	@$(FLEXCAT) locale/FlexCat.pot FlexCat_cat.h=sd/NoAutoC_h.sd
+	ifeq (,$(wildcard FlexCat_cat.h))
+		@echo "  FC $@"
+		@$(FLEXCAT) locale/FlexCat.pot FlexCat_cat.h=sd/NoAutoC_h.sd
+	endif
 
 locale_other.c: locale/FlexCat.pot sd/Hardcode_c.sd
-	@echo "  FC $@"
-	@$(FLEXCAT) locale/FlexCat.pot locale_other.c=sd/Hardcode_c.sd
+	ifeq (,$(wildcard locale_other.c))
+		@echo "  FC $@"
+		@$(FLEXCAT) locale/FlexCat.pot locale_other.c=sd/Hardcode_c.sd
+	endif
 
 FlexCat_cat_other.h: locale/FlexCat.pot sd/Hardcode_h.sd
-	@echo "  FC $@"
-	@$(FLEXCAT) locale/FlexCat.pot FlexCat_cat_other.h=sd/Hardcode_h.sd
+	ifeq (,$(wildcard FlexCat_cat_other.h))
+		@echo "  FC $@"
+		@$(FLEXCAT) locale/FlexCat.pot FlexCat_cat_other.h=sd/Hardcode_h.sd
+	endif
 
 locale/%.catalog: locale/%.po
 	@echo "  MK $@"
