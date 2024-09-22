@@ -508,28 +508,29 @@ $(TARGET): $(OBJDIR) $(DEPDIR) $(BINDIR) $(CATFILES) $(addprefix $(OBJDIR)/,$(OB
 	@$(CHMOD) $@
 
 locale.c: locale/FlexCat.pot sd/NoAutoC_c.sd
-	ifeq (,$(wildcard locale.c))
-		@echo "  FC $@"
-		@$(FLEXCAT) locale/FlexCat.pot locale.c=sd/NoAutoC_c.sd
-	endif
+	@if [ ! -f $@ ]; then \
+		echo "  FC $@"; \
+		$(FLEXCAT) locale/FlexCat.pot locale.c=sd/NoAutoC_c.sd; \
+	fi
 
 FlexCat_cat.h: locale/FlexCat.pot sd/NoAutoC_h.sd
-	ifeq (,$(wildcard FlexCat_cat.h))
-		@echo "  FC $@"
-		@$(FLEXCAT) locale/FlexCat.pot FlexCat_cat.h=sd/NoAutoC_h.sd
-	endif
+	@if [ ! -f $@ ]; then \
+		echo "  FC $@"; \
+		$(FLEXCAT) locale/FlexCat.pot FlexCat_cat.h=sd/NoAutoC_h.sd; \
+	fi
 
 locale_other.c: locale/FlexCat.pot sd/Hardcode_c.sd
-	ifeq (,$(wildcard locale_other.c))
-		@echo "  FC $@"
-		@$(FLEXCAT) locale/FlexCat.pot locale_other.c=sd/Hardcode_c.sd
-	endif
+	@if [ ! -f $@ ]; then \
+		echo "  FC $@"; \
+		$(FLEXCAT) locale/FlexCat.pot locale_other.c=sd/Hardcode_c.sd; \
+	fi
 
 FlexCat_cat_other.h: locale/FlexCat.pot sd/Hardcode_h.sd
-	ifeq (,$(wildcard FlexCat_cat_other.h))
-		@echo "  FC $@"
-		@$(FLEXCAT) locale/FlexCat.pot FlexCat_cat_other.h=sd/Hardcode_h.sd
-	endif
+	@if [ ! -f $@ ]; then \
+		echo "  FC $@"; \
+		$(FLEXCAT) locale/FlexCat.pot FlexCat_cat_other.h=sd/Hardcode_h.sd; \
+	fi
+
 
 locale/%.catalog: locale/%.po
 	@echo "  MK $@"
