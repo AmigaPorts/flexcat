@@ -72,6 +72,9 @@ ifndef (OS)
   ifeq ($(HOST), Linux)
     OS = unix
   else
+  ifeq ($(HOST), Darwin)
+    OS = unix
+  else
   ifeq ($(HOST), Windows)
     OS = mingw32
   else
@@ -97,6 +100,7 @@ ifndef (OS)
     endif
   else
     OS = os4
+  endif
   endif
   endif
   endif
@@ -391,15 +395,21 @@ ifeq ($(OS), unix)
   # Linux (unix)
 
   ifneq ($(HOST), Linux)
+  ifneq ($(HOST), Darwin)
     CC      = x86_64-linux-gnu-gcc
     STRIP   = x86_64-linux-gnu-strip
     OBJDUMP = x86_64-linux-gnu-objdump
+  endif
   endif
 
   # Compiler/Linker flags
   OPTFLAGS = -O3 -fomit-frame-pointer
   CFLAGS += -D_GNU_SOURCE
-  LDFLAGS = 
+  LDFLAGS =
+
+  ifeq ($(HOST), Darwin)
+    LDLIBS += -liconv
+  endif
 
   SYSDEPOBJS = locale_other.o
 
@@ -502,9 +512,9 @@ endif
 
 $(TARGET): $(OBJDIR) $(DEPDIR) $(BINDIR) $(CATFILES) $(addprefix $(OBJDIR)/,$(OBJS))
 	@echo "  LD $@.debug"
-	@$(CC) $(LDFLAGS) -o $@.debug $(addprefix $(OBJDIR)/,$(OBJS)) $(LDLIBS) -Wl,--cref,-M,-Map=$@.map
+	@$(CC) $(LDFLAGS) -o $@.debug $(addprefix $(OBJDIR)/,$(OBJS)) $(LDLIBS)
 	@echo "  LD $@"
-	@$(STRIP) --preserve-dates -R.comment -R.sdata2 -S -o $@ $@.debug
+	@$(STRIP) -S -o $@ $@.debug
 	@$(CHMOD) $@
 
 locale.c: locale/FlexCat.pot sd/NoAutoC_c.sd
