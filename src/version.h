@@ -81,6 +81,10 @@
   #define CPU "x86"
 #elif defined(__x86_64__)
   #define CPU "x86_64"
+#elif defined(__aarch64__) || defined(__arm64__)
+  #define CPU "arm64"
+#elif defined(__arm__)
+  #define CPU "arm"
 #else
   #warning "Unsupported CPU model - check CPU define"
   #define CPU "???"
