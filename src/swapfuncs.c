@@ -53,8 +53,8 @@ int SwapChoose(void)
   unsigned short w;
   uint32 d;
 
-  strncpy((char *)&w, "\1\2", 2);
-  strncpy((char *)&d, "\1\2\3\4", 4);
+  memcpy(&w, "\1\2", 2);
+  memcpy(&d, "\1\2\3\4", 4);
 
   if(w == 0x0201)
     SwapWord = SwapWord21;
