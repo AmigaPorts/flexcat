@@ -184,7 +184,7 @@ DEBUG    = -DDEBUG -fno-omit-frame-pointer #-O0
 DEBUGSYM = -g -gstabs
 CFLAGS   = -I. -I./include $(CPU) $(WARN) $(OPTFLAGS) $(DEBUG) $(DEBUGSYM)
 LDFLAGS  = $(CPU) $(DEBUGSYM)
-LDLIBS   = -L$(LIB)
+LDLIBS   = $(if $(wildcard $(LIB)),-L$(LIB))
 
 # different options per target OS
 ifeq ($(OS), os4)
@@ -404,6 +404,7 @@ ifeq ($(OS), unix)
 
   # Compiler/Linker flags
   OPTFLAGS = -O3 -fomit-frame-pointer
+  DEBUGSYM = -g
   CFLAGS += -D_GNU_SOURCE
   LDFLAGS =
 
