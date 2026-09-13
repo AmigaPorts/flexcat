@@ -8,7 +8,7 @@ FlexCat is a tool to create Amiga localization catalogs (*.catalog files) simila
 ## Features
 
 * Runs on any computer (I hope)
-* Fully portable (versions for AmigaOS3, AmigaOS4, MorphOS, AROS, Linux (i386) and Windows)
+* Fully portable (versions for AmigaOS3, AmigaOS4, MorphOS, AROS, Linux (i386), macOS and Windows)
 * Localized of course ;-) (AmigaOS versions only)
 * Can produce catalog handling source code for any language (templates for Assembler, C, C++, E, Oberon and Modula-2 included)
 * Written by the people who use it daily (so it should cover all your needs)
