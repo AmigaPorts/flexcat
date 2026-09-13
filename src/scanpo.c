@@ -199,7 +199,7 @@ int ScanPOFile(char *pofile, int verwarning)
             }
             else if(Stricmp(line, "ca") == 0) // catalan
             {
-              language = "català";
+              language = "catal\xe0";
               CatDstCharset = "iso-8859-15";
             }
             else if(Stricmp(line, "hr") == 0) // croatian
@@ -231,7 +231,7 @@ int ScanPOFile(char *pofile, int verwarning)
             }
             else if(Stricmp(line, "fr") == 0) // french
             {
-              language = "français";
+              language = "fran\xe7""ais";
               CatDstCharset = "iso-8859-15";
             }
             else if(Stricmp(line, "de") == 0) // german
@@ -280,9 +280,9 @@ int ScanPOFile(char *pofile, int verwarning)
               CatDstCharset = "iso-8859-2";
             }
             else if(Stricmp(line, "pt") == 0) // portuguese
-              language = "português";
+              language = "portugu\xeas";
             else if(Stricmp(line, "pt_BR") == 0) // portuguese-brazil
-              language = "português-brasil";
+              language = "portugu\xeas-brasil";
             else if(Stricmp(line, "ru") == 0) // russian
             {
               language = "russian";
@@ -309,7 +309,7 @@ int ScanPOFile(char *pofile, int verwarning)
             }
             else if(Stricmp(line, "es") == 0) // spanish
             {
-              language = "español";
+              language = "espa\xf1ol";
               CatDstCharset = "iso-8859-15";
             }
             else if(Stricmp(line, "sv") == 0) // swedish
@@ -319,7 +319,7 @@ int ScanPOFile(char *pofile, int verwarning)
             }
             else if(Stricmp(line, "tr") == 0) // turkish
             {
-              language = "türkçe";
+              language = "t\xfc""rk\xe7""e";
               CatDstCharset = "iso-8859-9";
             }
 
