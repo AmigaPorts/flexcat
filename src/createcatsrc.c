@@ -230,6 +230,7 @@ void WriteBinChar(int c)
 
         case OutputMode_Ascii:
           putc('\'', OutputFile);
+          /* fall-through */
 
         case OutputMode_Bin:
           fprintf(OutputFile, ",$%02x", c & 0xff);
@@ -652,7 +653,7 @@ void CreateSourceFile(char *SourceFile, char *TemplateFile, char *CDFile)
                     char *start;
                     char _StrLen[20 + 1];
 
-                    snprintf(_StrLen, sizeof(_StrLen), "%020" PRIx32, (long unsigned int)cs->ID);
+                    snprintf(_StrLen, sizeof(_StrLen), "%020" PRIx32, (uint32_t)cs->ID);
                     start = &_StrLen[20 - _len * 2];
                     while(_len > 0)
                     {
@@ -667,7 +668,7 @@ void CreateSourceFile(char *SourceFile, char *TemplateFile, char *CDFile)
                     char *start;
                     char _StrLen[20 + 1];
 
-                    snprintf(_StrLen, sizeof(_StrLen), "%020" PRIx32, (long unsigned int)((CalcRealLength(cs->CD_Str) + 1) & 0xfffffe));
+                    snprintf(_StrLen, sizeof(_StrLen), "%020" PRIx32, (uint32_t)((CalcRealLength(cs->CD_Str) + 1) & 0xfffffe));
                     start = &_StrLen[20 - _len * 2];
                     while(_len > 0)
                     {
